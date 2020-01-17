@@ -1,0 +1,109 @@
+import turtle
+
+# making the canvas
+window = turtle.Screen()
+window.setup(500,500,700)
+window.bgcolor("pink")
+
+# making the cursor
+ttt = turtle.Turtle()
+ttt.pensize(10)
+ttt.color("green")
+ttt.shape("turtle")
+
+
+# making the tictactoe board
+def gameboard():
+    ttt.penup()
+    ttt.forward(240)
+    ttt.right(90)
+    ttt.forward(240)
+    ttt.left(90)
+
+    ttt.pendown()
+    for i in range (0,4):
+        ttt.left (90)
+        ttt.forward (480)
+    ttt.left(90)
+
+    for i in range (0,2):
+        ttt.forward(160)
+        ttt.left(90)
+        ttt.forward(480)
+        ttt.right(90)
+        ttt.forward(160)
+        ttt.right(90)
+        ttt.forward(480)
+        ttt.left(90)
+        ttt.forward(160)
+        ttt.left(90)
+
+
+
+
+# labeling each box
+# def numbers():
+#     ttt.penup()
+#     ttt.forward(50)
+#     ttt.left(90)
+#     ttt.forward(50)
+#     for i in range (0,3):
+#         ttt.write( i, font=("Arial", 20))
+#         ttt.forward(160)
+#     ttt.right(90)
+#     ttt.forward(160)
+#     ttt.right(90)
+#     for i in range (3,7):
+#         ttt.write(i, font=("Arial", 20))
+#         ttt.forward(160)
+#     ttt.left(90)
+#     ttt.forward(160)
+#     ttt.left(90)
+#     for i in range (6,10):
+#         ttt.write(i, font=("Arial", 20))
+#         ttt.forward(160)
+
+
+#     teleport turtle to each square to number
+
+# turtle.home()
+def game():
+    ttt.penup()
+    print("click where you want to go")
+    window.onclick(ttt.goto)
+    ttt.write("X", font=("Arial", 70))
+
+def startgame():
+    startgame = input("do you want to play tictactoe? ")
+    if startgame.lower() == ("yes"):
+        print("player 1 begin")
+    #     set title to 'p1'
+        game()
+    else:
+        print ("okay bye")
+
+
+gameboard()
+startgame()
+
+
+def startgame():
+    startgame = input("do you want to play tictactoe? ")
+    if startgame.lower() == ("yes"):
+        print("player 1 begin")
+    #     set title to 'p1'
+        window.onclick(ttt.goto)
+    elif startgame.lower() == ("no"):
+        print ("okay bye")
+    # fix this: else:
+        print ("please enter only 'yes' or 'no'")
+        startgame()
+
+
+
+
+
+
+
+
+window.mainloop ()
