@@ -1,0 +1,207 @@
+import turtle
+import time
+
+# making the canvas
+window = turtle.Screen()
+window.setup(500,500,700)
+window.bgcolor("pink")
+XandO = [[0,0,0],[0,0,0],[0,0,0]]
+player = 1
+
+
+# making the cursor
+ttt = turtle.Turtle()
+ttt.pensize(10)
+ttt.color("green")
+ttt.shape("turtle")
+ttt.speed(0)
+
+# making the tictactoe board
+def gameboard():
+    window.clear()
+    global XandO
+    global player
+    window.bgcolor("pink")
+    ttt.color("green")
+    XandO = [[0,0,0],[0,0,0],[0,0,0]]
+    player = 1
+    ttt.penup()
+    ttt.goto(0,0)
+    ttt.forward(240)
+    ttt.right(90)
+    ttt.forward(240)
+    ttt.left(90)
+
+    ttt.pendown()
+    for i in range (0,4):
+        ttt.left (90)
+        ttt.forward (480)
+    ttt.left(90)
+
+    for i in range (0,2):
+        ttt.forward(160)
+        ttt.left(90)
+        ttt.forward(480)
+        ttt.right(90)
+        ttt.forward(160)
+        ttt.right(90)
+        ttt.forward(480)
+        ttt.left(90)
+        ttt.forward(160)
+        ttt.left(90)
+
+def cordsToBoundries(x, y):
+	if(-80 > x > -240 and 80 < y < 240):
+		return [0,0]
+	elif(-80< x <80 and 80 < y < 240):
+		return [0,1]
+	elif(80< x <240 and 80 < y < 240):
+		return [0,2]
+	elif(-240< x <-80 and -80 < y < 80):
+		return [1,0]
+	elif(-80< x <80 and -80 < y < 80):
+		return [1,1]
+	elif(80< x <240 and -80 < y < 80):
+		return [1,2]
+	elif(-240< x <-80 and -240 < y < -80):
+		return [2,0]
+	elif(-80< x <80 and -240 < y < -80):
+		return [2,1]
+	elif(80< x <240 and -240 < y < -80):
+		return [2,2]
+
+		
+	#writing x and object
+def draw(xCell, yCell, player):
+	global ttt
+	ttt.penup()
+	ttt.hideturtle()
+	ttt.color('deep pink')
+	style = ('Courier', 50, 'italic')
+	if xCell == 0 and yCell == 0:
+		ttt.goto(-140,120)
+		if player == 1:
+			ttt.write('X', font=style, align='center')
+		if player == 2:
+			ttt.write('O', font=style, align='center')
+	if xCell == 0 and yCell == 1:
+		ttt.goto(0,120)
+		if player == 1:
+			ttt.write('X', font=style, align='center')
+		if player == 2:
+			ttt.write('O', font=style, align='center')
+	if xCell == 0 and yCell == 2:
+		ttt.goto(140,120)
+		if player == 1:
+			ttt.write('X', font=style, align='center')
+		if player == 2:
+			ttt.write('O', font=style, align='center')
+	if xCell == 1 and yCell == 0:
+		ttt.goto(-140,-40)
+		if player == 1:
+			ttt.write('X', font=style, align='center')
+		if player == 2:
+			ttt.write('O', font=style, align='center')
+	if xCell == 1 and yCell == 1:
+		ttt.goto(0,-40)
+		if player == 1:
+			ttt.write('X', font=style, align='center')
+		if player == 2:
+			ttt.write('O', font=style, align='center')
+	if xCell == 1 and yCell == 2:
+		ttt.goto(140,-40)
+		if player == 1:
+			ttt.write('X', font=style, align='center')
+		if player == 2:
+			ttt.write('O', font=style, align='center')
+	if xCell == 2 and yCell == 0:
+		ttt.goto(-140,-200)
+		if player == 1:
+			ttt.write('X', font=style, align='center')
+		if player == 2:
+			ttt.write('O', font=style, align='center')
+	if xCell == 2 and yCell == 1:
+		ttt.goto(0,-200)
+		if player == 1:
+			ttt.write('X', font=style, align='center')
+		if player == 2:
+			ttt.write('O', font=style, align='center')
+	if xCell == 2 and yCell == 2:
+		ttt.goto(140,-200)
+		if player == 1:
+			ttt.write('X', font=style, align='center')
+		if player == 2:
+			ttt.write('O', font=style, align='center')
+	
+	
+	
+		
+def startgame():
+	ui = input("Do you want to play Tic Tac Toe: ")
+	if ui.lower() == 'yes':
+		print('player 1 begin. you are X') 
+		gameboard()
+	elif ui.lower() == 'no':
+		exit()
+	else:
+		print("Please enter Yes or No: ")
+		startgame()
+		
+	#start playerloop
+def playerloop(x,y):
+	global player
+	xCell = cordsToBoundries(x, y)[0]
+	yCell = cordsToBoundries(x, y)[1]
+	
+	#check if box is used
+	if XandO[xCell][yCell] == 0:
+		XandO[xCell][yCell] = player
+		draw(xCell,yCell, player)
+		#checking if someone won the rows
+		if XandO [1] == [1,1,1] or XandO [0] == [1,1,1] or XandO[2] == [1,1,1]: 
+			print("player 1 has won")
+			startgame()
+		elif XandO [0] == [2,2,2] or XandO[1] == [2,2,2] or XandO[2] == [2,2,2]:
+			print("player 2 has won")
+			startgame()
+		#checking columns
+		for i in range(3):	
+			if XandO [0][i] == 1 and XandO[1][i] ==1 and XandO[2][i] == 1:
+				print ('player 1 has won')
+				startgame()
+			if XandO [0][i] == 2 and XandO[1][i] ==2 and XandO[2][i] ==2:
+				print ('player 2 has won')
+				startgame()
+		#checking the diagonals
+		if XandO[0][0]==1 and XandO[1][1]==1 and XandO[2][2]==1:
+			print ('player 1 has won')
+			startgame()
+		if XandO[0][2]==1 and XandO[1][1]==1 and XandO[2][0]==1:
+			print ('player 1 has won')
+			startgame()
+		if XandO[0][0]==2 and XandO[1][1]==2 and XandO[2][2]==2:
+			print ('player 2 has won')
+			startgame()
+		if XandO[0][2]==2 and XandO[1][1]==2 and XandO[2][0]==2:
+			print ('player 2 has won')
+			startgame()
+		if (not(0 in XandO[0]) and not(0 in XandO[1]) and not(0 in XandO[2])):
+			print("It is a TIE")
+			startgame()
+			
+			
+		
+		
+	
+	
+
+#switches from player 1 to 2	
+		if(player == 1):
+			player = 2
+		else:
+			player = 1
+	else:
+		print("Pick anoter Spot")
+startgame()
+window.onclick(playerloop)
+window.mainloop()
