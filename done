@@ -3,7 +3,7 @@ import time
 
 # making the canvas
 window = turtle.Screen()
-window.setup(500,500,700)
+window.setup(500,500,850)
 window.bgcolor("pink")
 XandO = [[0,0,0],[0,0,0],[0,0,0]]
 player = 1
@@ -70,7 +70,7 @@ def cordsToBoundries(x, y):
 	elif(80< x <240 and -240 < y < -80):
 		return [2,2]
 
-		
+
 	#writing x and object
 def draw(xCell, yCell, player):
 	global ttt
@@ -132,40 +132,40 @@ def draw(xCell, yCell, player):
 			ttt.write('X', font=style, align='center')
 		if player == 2:
 			ttt.write('O', font=style, align='center')
-	
-	
-	
-		
+
+
+
+
 def startgame():
 	ui = input("Do you want to play Tic Tac Toe: ")
 	if ui.lower() == 'yes':
-		print('player 1 begin. you are X') 
+		print('player 1 begin. you are X')
 		gameboard()
 	elif ui.lower() == 'no':
 		exit()
 	else:
 		print("Please enter Yes or No: ")
 		startgame()
-		
+
 	#start playerloop
 def playerloop(x,y):
 	global player
 	xCell = cordsToBoundries(x, y)[0]
 	yCell = cordsToBoundries(x, y)[1]
-	
+
 	#check if box is used
 	if XandO[xCell][yCell] == 0:
 		XandO[xCell][yCell] = player
 		draw(xCell,yCell, player)
 		#checking if someone won the rows
-		if XandO [1] == [1,1,1] or XandO [0] == [1,1,1] or XandO[2] == [1,1,1]: 
+		if XandO [1] == [1,1,1] or XandO [0] == [1,1,1] or XandO[2] == [1,1,1]:
 			print("player 1 has won")
 			startgame()
 		elif XandO [0] == [2,2,2] or XandO[1] == [2,2,2] or XandO[2] == [2,2,2]:
 			print("player 2 has won")
 			startgame()
 		#checking columns
-		for i in range(3):	
+		for i in range(3):
 			if XandO [0][i] == 1 and XandO[1][i] ==1 and XandO[2][i] == 1:
 				print ('player 1 has won')
 				startgame()
@@ -188,17 +188,19 @@ def playerloop(x,y):
 		if (not(0 in XandO[0]) and not(0 in XandO[1]) and not(0 in XandO[2])):
 			print("It is a TIE")
 			startgame()
-			
-			
-		
-		
-	
-	
 
-#switches from player 1 to 2	
+
+
+
+
+
+
+#switches from player 1 to 2
 		if(player == 1):
+			print("it is now O's turn")
 			player = 2
 		else:
+			print("it is now X's turn")
 			player = 1
 	else:
 		print("Pick anoter Spot")
