@@ -18,7 +18,7 @@ ttt.speed(0)
 
 # making the tictactoe board
 def gameboard():
-    window.clear()
+    ttt.clear()
     global XandO
     global player
     window.bgcolor("pink")
