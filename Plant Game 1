@@ -1,0 +1,32 @@
+from tkinter import *
+
+window= Tk()
+
+
+
+playground = Canvas(window, width = 800, height = 600, bg="green")
+playground.pack()
+gardenImg = PhotoImage(file = "garden.gif")
+gardenBg = playground.create_image(20,20,anchor = NW, image=gardenImg)
+# this creates the background image
+
+
+def plantpot():
+    print("Great! What color pot do you want? ")
+
+def first():
+     print("Welcome to the garden!")
+     startgame = input("Do you want to grow your own rose bush? ")
+     if startgame.lower() == "yes":
+         plantpot()
+
+     elif startgame.lower() == 'no':
+         exit()
+     else:
+          print("Please enter either Yes or No")
+          first()
+
+first()
+
+
+window.mainloop()
